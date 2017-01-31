@@ -2,11 +2,10 @@
     "version": "0.1.0",
     "command": "go",
     "isShellCommand": true,
-    "showOutput": "silent",
+    "showOutput": "always",
     "tasks": [{
             "taskName": "install",
             "args": ["-v", "./..."],
-            "showOutput": "always",
             "isBuildCommand": true
         },
         {
