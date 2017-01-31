@@ -21,12 +21,18 @@ func initDB(dataSourceName string) {
 	}
 }
 
-func loadEmployees() *Employee {
+func loadEmployees(id int) *Employee {
 
-	rows, err := db.Query("select emp_no, first_name, last_name from employees where emp_no = 10415")
+	stmt, err := db.Prepare("select emp_no, first_name, last_name from employees where emp_no = ?")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer stmt.Close()
+	rows, err := stmt.Query(id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	defer rows.Close()
 
 	emp := new(Employee)
